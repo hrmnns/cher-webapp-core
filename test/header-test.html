@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,14 +9,26 @@
     <!-- Core-Dateien absolut laden (GitHub Pages kompatibel) -->
     <script src="/cher-webapp-core/lib/core/init.js"></script>
     <script src="/cher-webapp-core/lib/core/config.js"></script>
-    <script src="/cher-webapp-core/lib/core/loader.js"></script>
+    <script type="module" src="/cher-webapp-core/lib/core/loader.js"></script>
+
 
     <style>
-        body { font-family: sans-serif; }
-        .test-ok { color: #067a00; font-weight: 600; }
-        .test-fail { color: #b30000; font-weight: 600; }
+        body {
+            font-family: sans-serif;
+        }
+
+        .test-ok {
+            color: #067a00;
+            font-weight: 600;
+        }
+
+        .test-fail {
+            color: #b30000;
+            font-weight: 600;
+        }
     </style>
 </head>
+
 <body class="bg-gray-50">
 
     <!-- Header absolut einbinden -->
@@ -89,4 +102,5 @@
     </script>
 
 </body>
+
 </html>
