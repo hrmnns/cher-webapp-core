@@ -6,32 +6,66 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Header Demo</title>
 
-    <!-- Tailwind und Framework laden -->
+    <!-- Core-Dateien absolut laden (GitHub Pages kompatibel) -->
     <script src="/cher-webapp-core/lib/core/init.js"></script>
     <script src="/cher-webapp-core/lib/core/config.js"></script>
     <script type="module" src="/cher-webapp-core/lib/core/loader.js"></script>
 
+    <style>
+        body {
+            font-family: sans-serif;
+        }
 
+        .demo-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid #eee;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+        }
+    </style>
 </head>
 
 <body class="bg-gray-50">
 
-    <!-- Header einbinden -->
+    <!-- Header absolut einbinden -->
     <div data-include="/cher-webapp-core/lib/components/header.html"></div>
 
     <main class="max-w-4xl mx-auto p-6">
-        <h2 class="text-xl font-semibold mb-4">Beispielseite: Header-Komponente</h2>
+        <div class="demo-card">
+            <h2 class="text-xl font-semibold mb-4">
+                Beispielseite: Header-Komponente
+            </h2>
 
-        <p class="text-gray-700">
-            Diese Seite zeigt die <strong>header.html</strong> Komponente in ihrer Standardkonfiguration.
-            Titel und Untertitel werden dynamisch aus der <code>config.js</code> geladen.
-        </p>
+            <p class="text-gray-700">
+                Diese Seite zeigt die <strong>header.html</strong>-Komponente im Einsatz.<br>
+                Der <strong>Titel</strong> und der <strong>Untertitel</strong> stammen aus der Datei
+                <code>config.js</code>.
+            </p>
 
-        <p class="mt-4 text-gray-600">
-            Passe in der Datei <code>config.js</code> die Werte <code>appTitle</code> und
-            <code>appSubtitle</code> an und lade die Seite neu, um die Live-Änderungen zu sehen.
-        </p>
+            <p class="mt-4 text-gray-600">
+                Du kannst in <code>/lib/core/config.js</code> die Werte
+                <code>appTitle</code> und <code>appSubtitle</code> ändern und die Seite neu laden,
+                um das Verhalten live zu testen.
+            </p>
+
+            <hr class="my-6">
+
+            <h3 class="font-semibold mb-2">Aktuelle Header-Daten (live aus window.appConfig):</h3>
+
+            <pre id="config-view" style="background:#f8f8f8; padding:1rem; border-radius:6px; border:1px solid #ddd;">
+Lade Daten…
+            </pre>
+        </div>
     </main>
+
+    <script>
+        // Sobald alle Includes geladen sind:
+        document.addEventListener("includesLoaded", () => {
+            const view = document.getElementById("config-view");
+            view.textContent = JSON.stringify(window.appConfig, null, 2);
+        });
+    </script>
 
 </body>
 
