@@ -1,1 +1,9 @@
+/* cher-webapp-core – Tailwind Basis
+   Hinweis: Diese Datei dient als Ausgangspunkt für das Build nach /cdn/v1.
+   Sie wird über die Tailwind-CLI in eine minifizierte Version kompiliert.
+*/
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 

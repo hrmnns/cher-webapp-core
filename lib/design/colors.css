@@ -1,1 +1,41 @@
+/* ================================
+   cher-webapp-core – Farb-Designsystem
+   Datei: lib/design/colors.css
+   Version: v0.1.0
+=================================== */
+
+:root {
+  /* Grundfarben */
+  --color-bg: #f4f7fa;
+  --color-surface: #ffffff;
+
+  --color-primary: #003366;    /* tiefes Blau, cherware-Stil */
+  --color-primary-soft: #e0ecff;
+  --color-accent: #2563eb;
+
+  --color-text: #1f2937;
+  --color-text-muted: #6b7280;
+
+  --color-border: #e5e7eb;
+  --color-error: #b91c1c;
+  --color-success: #15803d;
+}
+
+/* Semantische Hilfsklassen – optional, aber konsistent */
+
+.bg-app {
+  background-color: var(--color-bg);
+}
+
+.bg-surface {
+  background-color: var(--color-surface);
+}
+
+.text-muted {
+  color: var(--color-text-muted);
+}
+
+.border-default {
+  border-color: var(--color-border);
+}
 
