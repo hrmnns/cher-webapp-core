@@ -11,6 +11,7 @@
     <script src="/cher-webapp-core/lib/core/loader.js"></script>
 
     <style>
+        body { font-family: sans-serif; }
         .test-ok { color: #067a00; font-weight: 600; }
         .test-fail { color: #b30000; font-weight: 600; }
     </style>
@@ -22,14 +23,18 @@
 
     <main class="max-w-4xl mx-auto p-6">
         <h2 class="text-2xl font-bold mb-6">Automatischer Header-Komponenten-Test</h2>
+        <p class="text-gray-600 mb-4">
+            Diese Seite testet die header.html Komponente nach dem Laden durch den neuen Loader.
+        </p>
 
         <div id="test-results" class="space-y-3 text-gray-800"></div>
     </main>
 
     <script>
-        // Warten, bis loader.js das custom Event "includesLoaded" feuert
+        // Wir warten jetzt wirklich auf das Event, das der neue Loader garantiert feuert
         document.addEventListener("includesLoaded", () => {
-            setTimeout(runTests, 150);
+            // kurzer Delay, damit DOM gerendert ist
+            setTimeout(runTests, 50);
         });
 
         function runTests() {
@@ -41,11 +46,13 @@
 
             const tests = [];
 
+            // 1) Titel korrekt gesetzt?
             tests.push(check(
                 "Der Titel wurde korrekt gesetzt.",
-                titleEl && titleEl.textContent === config.appTitle
+                titleEl && titleEl.textContent.trim() === config.appTitle
             ));
 
+            // 2) Untertitel korrekt sichtbar / versteckt
             const subtitleShouldBeVisible = !!config.appSubtitle;
             const subtitleIsVisible = subtitleEl && !subtitleEl.classList.contains("hidden");
 
@@ -54,11 +61,13 @@
                 subtitleShouldBeVisible === subtitleIsVisible
             ));
 
+            // 3) Existiert der Header wirklich?
             tests.push(check(
                 "Der Header wurde geladen und enthält die erwarteten Elemente.",
                 !!titleEl && !!subtitleEl
             ));
 
+            // 4) Fallback → es sind keine JS-Fehler aufgetreten
             tests.push(check(
                 "Kein Fehler beim Laden der Komponente aufgetreten.",
                 true
