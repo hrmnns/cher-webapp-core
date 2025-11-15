@@ -37,4 +37,4 @@ unterstützen und zentral weiterentwickelt werden kann.
 
 ## Dokumentation
 
-Die  Dokumentation sowie das zugrunde liegende Konzept findet sich im [Wiki](../../wiki). Dort werden Architektur, Verwendung und die technischen Details ausführlich beschrieben.
+Die  Dokumentation sowie das zugrunde liegende Konzept findet sich im [Wiki](https://github.com/hrmnns/cher-webapp-core/wiki). Dort werden Architektur, Verwendung und die technischen Details ausführlich beschrieben.
