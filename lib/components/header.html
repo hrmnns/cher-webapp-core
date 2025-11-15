@@ -1,45 +1,13 @@
 <header class="w-full bg-white shadow-sm border-b border-gray-200">
-    <div class="max-w-4xl mx-auto w-full px-4 py-4">
+  <div class="max-w-4xl mx-auto w-full px-4 py-4">
 
-        <!-- Titel der App (wird dynamisch gesetzt) -->
-        <h1 id="app-title" class="text-2xl font-bold text-gray-900">
-            WebApp <!-- Fallback, falls JS oder config fehlt -->
-        </h1>
+    <!-- Titel der App (wird dynamisch per loader.js gesetzt) -->
+    <h1 id="app-title" class="text-2xl font-bold text-gray-900">
+      WebApp <!-- Fallback, falls JS oder config fehlen -->
+    </h1>
 
-        <!-- Untertitel, optional -->
-        <p id="app-subtitle" class="text-sm text-gray-500 mt-1 hidden"></p>
+    <!-- Untertitel, optional -->
+    <p id="app-subtitle" class="text-sm text-gray-500 mt-1 hidden"></p>
 
-    </div>
+  </div>
 </header>
-
-<script>
-    document.addEventListener("includesLoaded", () => {
-        try {
-            const titleEl = document.getElementById("app-title");
-            const subtitleEl = document.getElementById("app-subtitle");
-
-            if (!titleEl || !subtitleEl) {
-                console.warn("Header-Elemente nicht im DOM gefunden.");
-                return;
-            }
-
-            const cfg = window.appConfig || {};
-
-            // Titel setzen
-            if (cfg.appTitle) {
-                titleEl.textContent = cfg.appTitle;
-            }
-
-            // Untertitel ein-/ausblenden
-            if (cfg.appSubtitle) {
-                subtitleEl.textContent = cfg.appSubtitle;
-                subtitleEl.classList.remove("hidden");
-            } else {
-                subtitleEl.classList.add("hidden");
-            }
-
-        } catch (err) {
-            console.error("Fehler beim Initialisieren des Headers:", err);
-        }
-    });
-</script>
