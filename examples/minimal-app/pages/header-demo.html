@@ -1,83 +1,37 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Header Auto-Test</title>
+    <title>Header Demo</title>
 
-    <!-- Core-Dateien absolut laden (GitHub Pages kompatibel) -->
+    <!-- Tailwind und Framework laden -->
     <script src="/cher-webapp-core/lib/core/init.js"></script>
     <script src="/cher-webapp-core/lib/core/config.js"></script>
     <script src="/cher-webapp-core/lib/core/loader.js"></script>
 
-    <style>
-        .test-ok { color: #067a00; font-weight: 600; }
-        .test-fail { color: #b30000; font-weight: 600; }
-    </style>
 </head>
+
 <body class="bg-gray-50">
 
-    <!-- Header absolut einbinden -->
+    <!-- Header einbinden -->
     <div data-include="/cher-webapp-core/lib/components/header.html"></div>
 
     <main class="max-w-4xl mx-auto p-6">
-        <h2 class="text-2xl font-bold mb-6">Automatischer Header-Komponenten-Test</h2>
+        <h2 class="text-xl font-semibold mb-4">Beispielseite: Header-Komponente</h2>
 
-        <div id="test-results" class="space-y-3 text-gray-800"></div>
+        <p class="text-gray-700">
+            Diese Seite zeigt die <strong>header.html</strong> Komponente in ihrer Standardkonfiguration.
+            Titel und Untertitel werden dynamisch aus der <code>config.js</code> geladen.
+        </p>
+
+        <p class="mt-4 text-gray-600">
+            Passe in der Datei <code>config.js</code> die Werte <code>appTitle</code> und
+            <code>appSubtitle</code> an und lade die Seite neu, um die Live-Änderungen zu sehen.
+        </p>
     </main>
 
-    <script>
-        // Warten, bis loader.js das custom Event "includesLoaded" feuert
-        document.addEventListener("includesLoaded", () => {
-            setTimeout(runTests, 150);
-        });
-
-        function runTests() {
-            const results = document.getElementById("test-results");
-
-            const config = window.appConfig || {};
-            const titleEl = document.getElementById("app-title");
-            const subtitleEl = document.getElementById("app-subtitle");
-
-            const tests = [];
-
-            tests.push(check(
-                "Der Titel wurde korrekt gesetzt.",
-                titleEl && titleEl.textContent === config.appTitle
-            ));
-
-            const subtitleShouldBeVisible = !!config.appSubtitle;
-            const subtitleIsVisible = subtitleEl && !subtitleEl.classList.contains("hidden");
-
-            tests.push(check(
-                "Der Untertitel wird korrekt ein- oder ausgeblendet.",
-                subtitleShouldBeVisible === subtitleIsVisible
-            ));
-
-            tests.push(check(
-                "Der Header wurde geladen und enthält die erwarteten Elemente.",
-                !!titleEl && !!subtitleEl
-            ));
-
-            tests.push(check(
-                "Kein Fehler beim Laden der Komponente aufgetreten.",
-                true
-            ));
-
-            results.innerHTML = tests.join("");
-        }
-
-        function check(label, ok) {
-            return `
-                <div>
-                    <span class="${ok ? 'test-ok' : 'test-fail'}">
-                        ${ok ? "✔ OK" : "✘ FAIL"}
-                    </span>
-                    – ${label}
-                </div>
-            `;
-        }
-    </script>
-
 </body>
+
 </html>

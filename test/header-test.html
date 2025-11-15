@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Header Auto-Test</title>
 
-    <script src="../lib/core/init.js"></script>
-    <script src="../lib/core/config.js"></script>
-    <script src="../lib/core/loader.js"></script>
+    <!-- Core-Dateien absolut laden (GitHub Pages kompatibel) -->
+    <script src="/cher-webapp-core/lib/core/init.js"></script>
+    <script src="/cher-webapp-core/lib/core/config.js"></script>
+    <script src="/cher-webapp-core/lib/core/loader.js"></script>
 
     <style>
         .test-ok { color: #067a00; font-weight: 600; }
@@ -16,7 +17,8 @@
 </head>
 <body class="bg-gray-50">
 
-    <div data-include="../lib/components/header.html"></div>
+    <!-- Header absolut einbinden -->
+    <div data-include="/cher-webapp-core/lib/components/header.html"></div>
 
     <main class="max-w-4xl mx-auto p-6">
         <h2 class="text-2xl font-bold mb-6">Automatischer Header-Komponenten-Test</h2>
@@ -25,7 +27,7 @@
     </main>
 
     <script>
-        // Warten, bis loader.js alle Includes geladen hat
+        // Warten, bis loader.js das custom Event "includesLoaded" feuert
         document.addEventListener("includesLoaded", () => {
             setTimeout(runTests, 150);
         });
