@@ -1,0 +1,115 @@
+name: "Feature Request"
+description: "Vorschlag für eine neue Funktion, Verbesserung oder Komponente im webapp-core Framework."
+title: "[Feature] "
+labels:
+  - enhancement
+  - discussion
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## 🚀 Feature Request für *webapp-core*
+
+        Bitte fülle das Template möglichst vollständig aus, damit das Feature sauber im Kontext der Architektur bewertet und umgesetzt werden kann.
+
+  - type: input
+    id: summary
+    attributes:
+      label: "Kurze Zusammenfassung"
+      description: "Ein prägnanter Titel oder Kurzsatz zur geplanten Funktion oder Verbesserung."
+      placeholder: "z. B. ‚Neue Komponente: collapsible-card‘"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: "Beschreibung / Zielsetzung"
+      description: "Beschreibe das Feature, die Motivation dahinter und den Nutzen im Gesamtframework."
+      placeholder: |
+        Was soll gebaut werden?
+        Warum ist das wichtig?
+        Wie fügt es sich in das modulare Konzept des Frameworks ein?
+    validations:
+      required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: "Kategorie"
+      description: "Worum handelt es sich hauptsächlich?"
+      options:
+        - Neue UI-Komponente
+        - Erweiterung bestehender Komponente
+        - FormsEngine-Erweiterung
+        - Utility-/Helper-Funktion
+        - Verbesserung Design/Layout
+        - Dokumentation / Beispielseite
+        - Sonstiges
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance-criteria
+    attributes:
+      label: "Akzeptanzkriterien"
+      description: "Wann gilt das Feature als fertig? (Testbare Kriterien)"
+      placeholder: |
+        - [ ] Funktioniert responsiv in allen Breakpoints
+        - [ ] Kapselung in eigener HTML-Datei unter /lib/components
+        - [ ] Keine Inline-Styles, komplette Trennung von Layout & Logik
+        - [ ] Beispielseite unter /examples implementiert
+        - [ ] Dokumentation im Wiki ergänzt
+    validations:
+      required: true
+
+  - type: textarea
+    id: technical-details
+    attributes:
+      label: "Technische Details / Architekturhinweise"
+      description: "Architekturentscheidungen, Schnittstellen, Abhängigkeiten, Tailwind-Konfiguration, Events, Datenformat etc."
+      placeholder: |
+        - Event-Konzept
+        - Required Props / Attribute
+        - Datenformat für JSON / Config
+        - benötigte Utility-Funktionen
+        - mögliche Breaking Changes
+
+  - type: textarea
+    id: mockups
+    attributes:
+      label: "Mockups / Skizzen"
+      description: "Optional: Skizzen, HTML/Tailwind-Beispiele, Ablaufdiagramme."
+      placeholder: |
+        <div class="component-preview">
+          <!-- Beispiel für visuelle Idee -->
+        </div>
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: "Alternative Lösungswege"
+      description: "Wurden Alternativen betrachtet? Warum fällt die Wahl auf den vorgeschlagenen Ansatz?"
+      placeholder: "Optional, aber hilfreich."
+
+  - type: checkboxes
+    id: dependencies
+    attributes:
+      label: "Abhängigkeiten"
+      description: "Welche anderen Elemente müssen vorher erledigt sein?"
+      options:
+        - label: "Hängt von einem anderen Feature ab"
+        - label: "Erfordert Änderung in bestehenden Komponenten"
+        - label: "Erfordert Anpassung an der Dokumentation"
+        - label: "Keine Abhängigkeiten"
+
+  - type: textarea
+    id: references
+    attributes:
+      label: "Links / Referenzen"
+      description: "Verweise auf Wiki-Seiten, Code-Beispiele, Diskussionen, externe Quellen etc."
+      placeholder: |
+        - https://github.com/hrmnns/webapp-core/wiki/Komponenten-Design
+        - https://github.com/hrmnns/webapp-core/wiki/FormsEngine
