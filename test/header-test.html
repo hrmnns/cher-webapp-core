@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Header Auto-Test</title>
+
+    <script src="../lib/core/init.js"></script>
+    <script src="../lib/core/config.js"></script>
+    <script src="../lib/core/loader.js"></script>
+
+    <style>
+        /* Für übersichtliche Testergebnisse */
+        .test-ok { color: #067a00; font-weight: 600; }
+        .test-fail { color: #b30000; font-weight: 600; }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <!-- Header einbinden -->
+    <div data-include="../lib/components/header.html"></div>
+
+    <main class="max-w-4xl mx-auto p-6">
+
+        <h2 class="text-2xl font-bold mb-6">Automatischer Header-Komponenten-Test</h2>
+
+        <div id="test-results" class="space-y-3 text-gray-800"></div>
+
+        <hr class="my-6">
+
+        <h3 class="text-xl font-semibold mb-2">Responsive Tests</h3>
+        <div class="flex gap-3">
+            <button onclick="setWidth(375)" class="px-4 py-2 bg-gray-800 text-white rounded">iPhone</button>
+            <button onclick="setWidth(768)" class="px-4 py-2 bg-gray-800 text-white rounded">Tablet</button>
+            <button onclick="setWidth(1024)" class="px-4 py-2 bg-gray-800 text-white rounded">Laptop</button>
+            <button onclick="setWidth(1440)" class="px-4 py-2 bg-gray-800 text-white rounded">Desktop</button>
+        </div>
+        <p class="text-gray-600 mt-3">Diese Buttons simulieren verschiedene Bildschirmbreiten.</p>
+    </main>
+
+    <script>
+        function setWidth(width) {
+            document.documentElement.style.width = width + "px";
+            window.dispatchEvent(new Event('resize'));
+        }
+
+        // Automatischer Komponententest
+        document.addEventListener("DOMContentLoaded", () => {
+            setTimeout(runTests, 300); // etwas warten, bis loader.js das Include fertig hat
+        });
+
+        function runTests() {
+            const results = document.getElementById("test-results");
+
+            const titleEl = document.getElementById("app-title");
+            const subtitleEl = document.getElementById("app-subtitle");
+
+            const config = window.appConfig || {};
+
+            const tests = [];
+
+            // 1) Titel geladen?
+            tests.push(check(
+                "Der Titel wurde korrekt gesetzt.",
+                titleEl && titleEl.textContent === config.appTitle
+            ));
+
+            // 2) Untertitel sichtbar nur falls vorhanden
+            const subtitleShouldBeVisible = !!config.appSubtitle;
+            const subtitleIsVisible = subtitleEl && !subtitleEl.classList.contains("hidden");
+
+            tests.push(check(
+                "Der Untertitel wird korrekt ein- oder ausgeblendet.",
+                subtitleShouldBeVisible === subtitleIsVisible
+            ));
+
+            // 3) Header existiert
+            tests.push(check(
+                "Der Header wurde geladen und enthält die erwarteten Elemente.",
+                !!titleEl && !!subtitleEl
+            ));
+
+            // 4) Keine JS Fehlermeldungen
+            tests.push(check(
+                "Kein Fehler beim Laden der Komponente aufgetreten.",
+                true // Fehler würden im Log sichtbar sein
+            ));
+
+            results.innerHTML = tests.join("");
+        }
+
+        function check(label, ok) {
+            return `
+                <div>
+                    <span class="${ok ? 'test-ok' : 'test-fail'}">
+                        ${ok ? "✔ OK" : "✘ FAIL"}
+                    </span>
+                    – ${label}
+                </div>
+            `;
+        }
+    </script>
+
+</body>
+</html>

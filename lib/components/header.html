@@ -1,1 +1,38 @@
+<header class="w-full bg-white shadow-sm border-b border-gray-200">
+  <div class="max-w-4xl mx-auto w-full px-4 py-4">
+    
+    <!-- App-Titel (wird per JS aus config.js befüllt) -->
+    <h1 id="app-title" class="text-2xl font-bold text-gray-900">
+      <!-- Fallback, falls JS nicht geladen -->
+      WebApp
+    </h1>
+
+    <!-- Untertitel (optional, wird automatisch versteckt wenn leer) -->
+    <p id="app-subtitle" class="text-sm text-gray-500 mt-1 hidden"></p>
+
+  </div>
+</header>
+
+<script>
+  // Dynamischer Titel/Untertitel aus config.js
+  document.addEventListener("DOMContentLoaded", () => {
+    try {
+      if (window.appConfig) {
+        const titleEl = document.getElementById("app-title");
+        const subtitleEl = document.getElementById("app-subtitle");
+
+        if (window.appConfig.appTitle) {
+          titleEl.textContent = window.appConfig.appTitle;
+        }
+
+        if (window.appConfig.appSubtitle) {
+          subtitleEl.textContent = window.appConfig.appSubtitle;
+          subtitleEl.classList.remove("hidden");
+        }
+      }
+    } catch (e) {
+      console.warn("Header konnte nicht geladen werden:", e);
+    }
+  });
+</script>
 

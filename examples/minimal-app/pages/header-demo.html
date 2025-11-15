@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Header Demo</title>
+
+    <!-- Tailwind und Framework laden -->
+    <script src="../lib/core/init.js"></script>
+    <script src="../lib/core/config.js"></script>
+    <script src="../lib/core/loader.js"></script>
+
+</head>
+<body class="bg-gray-50">
+
+    <!-- Header einbinden -->
+    <div data-include="../lib/components/header.html"></div>
+
+    <main class="max-w-4xl mx-auto p-6">
+        <h2 class="text-xl font-semibold mb-4">Beispielseite: Header-Komponente</h2>
+
+        <p class="text-gray-700">
+            Diese Seite zeigt die <strong>header.html</strong> Komponente in ihrer Standardkonfiguration.
+            Titel und Untertitel werden dynamisch aus der <code>config.js</code> geladen.
+        </p>
+
+        <p class="mt-4 text-gray-600">
+            Passe in der Datei <code>config.js</code> die Werte <code>appTitle</code> und
+            <code>appSubtitle</code> an und lade die Seite neu, um die Live-Änderungen zu sehen.
+        </p>
+    </main>
+
+</body>
+</html>
