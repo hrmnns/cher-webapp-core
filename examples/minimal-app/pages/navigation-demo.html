@@ -1,0 +1,45 @@
+<h1 class="text-2xl font-bold mb-4">Navigation-Demo</h1>
+
+<p class="text-gray-700">
+    Diese Seite zeigt, wie Inhalte in der Minimal-App per
+    <code>fetch()</code> dynamisch geladen werden.
+</p>
+
+<p class="mt-4">
+    Die Navigation erfolgt durch Aufruf der Funktion
+    <code>loadPage()</code>, die im <strong>index.html</strong>
+    definiert ist und beliebige HTML-Dateien in
+    <code>#app-page-content</code> einfügt.
+</p>
+
+<hr class="my-6">
+
+<h2 class="text-xl font-semibold mb-3">Beispielnavigation</h2>
+
+<ul class="list-disc ml-6 text-gray-700">
+    <li>
+        <a href="#" onclick="loadPage('/cher-webapp-core/examples/minimal-app/pages/welcome.html')">
+            Zurück zur Startseite
+        </a>
+    </li>
+    <li>
+        <a href="#" onclick="loadPage('/cher-webapp-core/examples/minimal-app/pages/header-demo.html')">
+            Header-Demo öffnen
+        </a>
+    </li>
+</ul>
+
+<hr class="my-6">
+
+<h2 class="text-xl font-semibold mb-3">Technischer Hintergrund</h2>
+
+<p class="text-gray-700">
+    Diese App nutzt den <strong>Loader v2</strong>, um Komponenten wie den Header
+    automatisch nachzuladen. Inhalte wie diese Seite hingegen werden per
+    <code>fetch()</code> direkt in das Layout eingefügt.
+</p>
+
+<p class="mt-2 text-gray-700">
+    Dadurch kannst du das Layout einmalig definieren und beliebig viele Seiten
+    dynamisch einbinden — ohne dass jede Seite Header, Footer oder Navigation duplizieren muss.
+</p>

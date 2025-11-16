@@ -1,72 +1,126 @@
 <!DOCTYPE html>
 <html lang="de">
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Header Demo</title>
+    <title>Header-Demo – cher-webapp-core</title>
 
-    <!-- Core-Dateien absolut laden (GitHub Pages kompatibel) -->
+    <!-- CORE-Dateien laden (GitHub Pages kompatibel) -->
     <script src="/cher-webapp-core/lib/core/init.js"></script>
     <script src="/cher-webapp-core/lib/core/config.js"></script>
     <script type="module" src="/cher-webapp-core/lib/core/loader.js"></script>
 
     <style>
         body {
-            font-family: sans-serif;
+            font-family: system-ui, sans-serif;
+            background: #f7f7f8;
+            margin: 0;
+            padding: 0;
         }
-
         .demo-card {
             background: white;
             padding: 1.5rem;
-            border-radius: 8px;
-            border: 1px solid #eee;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+            border-radius: 10px;
+            border: 1px solid #e5e5e5;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+            margin-bottom: 2rem;
+        }
+        code {
+            background: #f2f2f5;
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+        pre {
+            background: #f2f2f5;
+            padding: 1rem;
+            border-radius: 6px;
+            overflow-x: auto;
+            border: 1px solid #ddd;
+        }
+        .ok {
+            color: #0a7c00;
+            font-weight: bold;
+        }
+        .fail {
+            color: #b00020;
+            font-weight: bold;
         }
     </style>
 </head>
 
-<body class="bg-gray-50">
+<body>
 
-    <!-- Header absolut einbinden -->
+    <!-- Header dynamisch via loader.js laden -->
     <div data-include="/cher-webapp-core/lib/components/header.html"></div>
 
     <main class="max-w-4xl mx-auto p-6">
+
         <div class="demo-card">
-            <h2 class="text-xl font-semibold mb-4">
-                Beispielseite: Header-Komponente
-            </h2>
+            <h1 class="text-xl font-bold mb-3">Beispielseite: Header-Komponente</h1>
 
             <p class="text-gray-700">
-                Diese Seite zeigt die <strong>header.html</strong>-Komponente im Einsatz.<br>
-                Der <strong>Titel</strong> und der <strong>Untertitel</strong> stammen aus der Datei
-                <code>config.js</code>.
+                Diese Seite zeigt die dynamische <strong>header.html</strong>-Komponente des
+                <code>cher-webapp-core</code>. Der Titel und der Untertitel werden automatisch aus
+                <code>config.js</code> übernommen.
             </p>
 
             <p class="mt-4 text-gray-600">
-                Du kannst in <code>/lib/core/config.js</code> die Werte
-                <code>appTitle</code> und <code>appSubtitle</code> ändern und die Seite neu laden,
-                um das Verhalten live zu testen.
+                Du kannst die Werte in <code>/lib/core/config.js</code> anpassen:
             </p>
 
-            <hr class="my-6">
-
-            <h3 class="font-semibold mb-2">Aktuelle Header-Daten (live aus window.appConfig):</h3>
-
-            <pre id="config-view" style="background:#f8f8f8; padding:1rem; border-radius:6px; border:1px solid #ddd;">
-Lade Daten…
+            <pre>
+window.appConfig = {
+  appTitle: "Meine WebApp",
+  appSubtitle: "Eine Demo der Header-Komponente",
+  theme: "light",
+  defaultPage: "index.html"
+};
             </pre>
+
         </div>
+
+        <div class="demo-card">
+            <h2 class="font-semibold mb-2">Live geladene Konfiguration</h2>
+
+            <p>Dies ist die aktuelle <code>window.appConfig</code> des Frameworks:</p>
+
+            <pre id="config-view">Lade Daten…</pre>
+
+            <div id="header-status" style="margin-top:1rem;"></div>
+        </div>
+
     </main>
 
     <script>
-        // Sobald alle Includes geladen sind:
         document.addEventListener("includesLoaded", () => {
-            const view = document.getElementById("config-view");
-            view.textContent = JSON.stringify(window.appConfig, null, 2);
+
+            // 1) Live config anzeigen
+            document.getElementById("config-view").textContent =
+                JSON.stringify(window.appConfig, null, 2);
+
+
+            // 2) Header prüfen
+            const titleEl = document.getElementById("app-title");
+            const subtitleEl = document.getElementById("app-subtitle");
+            const status = document.getElementById("header-status");
+
+            if (titleEl && subtitleEl) {
+                status.innerHTML = `
+                    <p class="ok">✔ Header erfolgreich geladen</p>
+                    <p><strong>Titel:</strong> ${titleEl.textContent}</p>
+                    <p><strong>Untertitel:</strong> ${
+                        subtitleEl.classList.contains("hidden")
+                          ? "(nicht gesetzt)"
+                          : subtitleEl.textContent
+                    }</p>
+                `;
+            } else {
+                status.innerHTML = `
+                    <p class="fail">✘ Header konnte nicht im DOM gefunden werden.</p>
+                `;
+            }
         });
     </script>
 
 </body>
-
 </html>
